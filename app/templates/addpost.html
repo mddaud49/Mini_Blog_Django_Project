@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .success{
+            color: blue;
+            background-color: pink;
+            height: fit-content;
+            width: fit-content;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="homContainer1">
+        <div class="homContainer">
+            <div>
+                <h2 class="h1">Add POST</h2>
+                {% if messages %}
+             {% for message in messages %}
+              <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</p>
+             {% endfor %}
+            {% endif %}
+            </div>
+            <div class="hom2">
+                <div class="contact-form">
+                    <form action="#" method="post">
+                        {% csrf_token %}
+
+                        {% for fm in form %}
+                        {{fm.label_tag}} {{fm}} {{fm.errors}}
+                        {% endfor %}
+                        <button type="submit">Add</button> <br>
+                    </form>
+                    <br>
+                    <button style="width: 200px; background-color: rgb(214, 24, 24)"><a href="{% url 'dashboard'%}">Cancel</a></button>
+                </div>
+
+                .
+
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+{% endblock content %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="homContainer">
+        <div >
+            <h1 class="h1" >Home Page</h1>
+        </div>
+        {% for post in posts %}
+         <div class="hom2">
+           <h2>{{post.title}}</h2>
+            <p style="padding-top: 10px; text-align: justify;">{{post.disc}}</p>
+         </div>
+        {% endfor %}
+    </div>
+
+    
+    
+</body>
+</html>
+{% endblock content %}

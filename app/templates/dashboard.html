@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .success {
+            color: blue;
+            background-color: pink;
+            height: fit-content;
+            width: fit-content;
+        }
+        table{
+            text-align: center;
+            height: 300px;
+            width: 1200px;
+            text-align: justify;
+            
+        }
+        tr,td,th{
+            border: 1px solid pink;
+            text-align: center;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="homContainer">
+        <div>
+            {% block side %}
+                <h3>PROFILE</h3>
+                <h5>{{full_name}}</h5>
+                {% for group in groups %}
+                 <p>{{group.name}}</p>
+                {% endfor %}
+            {% endblock side %}
+        </div>
+        <div class="h1">
+            <h1>Dashboard Page</h1> <br>
+            <a href="{% url 'addpost' %}"><Button style="width: 70px; background-color: blue; color: antiquewhite; border: none; height: 20px;" >Add POST</Button></a> <br>
+            <br>
+            {% if messages %}
+            {% for message in messages %}
+            <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="hom2">
+            {% if posts %}
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+                {% for post in posts %}
+                <tr>
+                    <td>{{post.id}}</td>
+                    <td>{{post.title}}</td>
+                    <td>{{post.disc}}</td>
+                    <td>
+                        <a href="{% url 'update' post.id %}"><button style="width: 50px; color: rgb(10, 4, 4);
+                        background-color: yellow;">Edit</button></a>
+                       {% if perms.app.delete_Post %}
+                       <form action="{% url 'delete' post.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete" style="width: 50px; color: rgb(10, 4, 4);
+                        background-color: rgb(255, 0, 0);">
+                       </form>
+                       {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+            <h3> NO DATA </h3>
+            {% endif %}
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+{% endblock content %}

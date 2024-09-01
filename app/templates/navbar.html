@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Navbar </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <nav>
+      <input type="checkbox" id="check">
+      <label for="check" class="checkbtn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <label class="logo">Mini Blog</label>
+      <ul>
+        <li><a class="active" href="/" >Home</a></li>
+        <li><a href="{% url 'about'%}" >About</a></li>
+        <li><a href="{% url 'contact'%}" >Contact</a></li>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'dashboard'%}" >Dashboard</a></li>
+        <li><a href="{% url 'logout'%}" >Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'signup'%}" >Signup</a></li>
+        <li><a href="{% url 'login'%}" >Login</a></li>
+        {% endif %}
+        
+      </ul>
+    </nav>
+  </body>
+</html>

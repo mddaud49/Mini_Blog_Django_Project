@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .success{
+            color: blue;
+            background-color: pink;
+            height: fit-content;
+            width: fit-content;
+        }
+       
+    </style>
+</head>
+
+<body>
+    <div class="homContainer1">
+        <div class="homContainer">
+            <div>
+                <h2 class="h1">Become an Author</h2>
+            </div>
+            {% if messages %}
+             {% for message in messages %}
+              <p {% if message.tags %} class="{{message.tags}}" {% endif %}>{{message}}</p>
+             {% endfor %}
+            {% endif %}
+            <div class="hom2">
+                <div class="contact-form">
+                    <form action="" method="POST" novalidate    >
+                        {% csrf_token %}
+
+                        {% if form.non_field_errors %}
+                         {% for error in fm.form.non_field_errors %}
+                          {{error}}
+                         {% endfor %}
+                        {% endif %}
+
+
+                        {% for fm in form %}
+                        {{fm.label_tag}} {{fm}} {{fm.errors}}
+                        {% endfor %}
+                        <button type="submit" value="submit">Submit</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+        
+    </div>
+
+    
+
+
+</body>
+
+</html>
+{% endblock content %}
